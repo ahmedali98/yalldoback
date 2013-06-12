@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=1, minimum-scale=0.5, maximum-scale=0.5" />
+		<link rel="stylesheet" type="text/css" href="yalldo.css" />
+		<!--<script src="scripts/steroids.js"></script>-->
+		<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+		<script src="scripts/buddies.js"></script>
+		<script src="scripts/clubs.js"></script>
+		<script src="scripts/create.js"></script>
+		<script src="scripts/events.js"></script>
+		<script src="scripts/explore.js"></script>
+		<script src="scripts/login.js"></script>
+		<script src="scripts/news.js"></script>
+		<script src="scripts/notifications.js"></script>
+		<script src="scripts/photo.js"></script>
+		<script src="scripts/register.js"></script>
+		<script src="scripts/settings.js"></script>
+		<script src="scripts/sites.js"></script>
+		<script src="scripts/testdata.js"></script>
+		<script src="scripts/jquery.js"></script>
+		<script src="scripts/zebra.js"></script>
+		<script src="scripts/cycle.js"></script>
+		<script src="yalldo.js"></script>
+		<script src="scripts/record.js"></script>
+		<script src="scripts/phonegap.js"></script>
+	
+	</head>
+	
+	<body scroll="no" style="margin:0;padding:0;border:0">
+	
+		<! -- WRAPPER ->
+		<div id="wrapper">
+		
+			<!-- MENU -->
+			<div id="menu">
+				<div id="menunews" class="menu"><div id="icon-star"></div><div id="icon-text">News</div></div>
+				<div id="menuexplore" class="menu"><div id="icon-compass"></div><div id="icon-text">Explore</div></div>
+				<div id="menuclubs" class="menu"><div id="icon-flag"></div><div id="icon-text">Clubs</div></div>
+				<div id="menusites" class="menu"><div id="icon-map"></div><div id="icon-text">Sites</div></div>
+				<div id="menubuddies" class="menu"><div id="icon-users"></div><div id="icon-text">Buddies</div><!--<div class="menunot">2</div>--></div>
+				<div id="menuevents" class="menu"><div id="icon-flight"></div><div id="icon-text">Flights</div></div>
+				<div id="menusettings" class="menu"><div id="icon-settings"></div><div id="icon-text">Settings</div></div>
+				<div id="menutest" class="menu"><div id="icon-plus"></div><div id="icon-text">Backend</div></div>
+			</div>
+
+			<!-- NOTIFICATIONS -->
+			<div id="menu2"></div>
+			
+			<div id="pagebg"></div>
+
+			<div id="page">
+			
+				<!-- BAR -->
+				<div id="bar">
+					<form onsubmit="return barsearch()"><table>
+						<tr>
+							<td style="padding-top:18px"><a id="barbutton" class="button button-green" style="margin-left:18px">New</a></td>
+							<td style="padding:18px"><input id="barinput" type="text" placeholder="Search with keyword..." style="width:317px"/></td>
+							<td style="padding-top:18px"><a id="barsearch" class="button button-green">Search</a></td>
+							<td style="padding-top:18px;padding-left:16px;display:none"><a id="barsync" class="button button-orange">Sync</a></td>
+						</tr>
+					</table></form>
+				</div>
+				
+				<!-- BUDDIES -->
+				<div id="buddies" class="page">
+					<div id="buddiestitle" style="padding-top:25px;padding-left:20px;padding-bottom:10px;color:#000000;font-size:50px">My Buddies</div>
+					<div id="buddiescontent"></div>
+					<div id="buddiestitle2" style="padding-top:20px;padding-left:20px;padding-bottom:10px;color:#000000;font-size:50px">Recommended Buddies</div>
+					<div id="buddiesrecommended"></div>
+				</div>
+
+				<!-- CHECKIN -->
+				<div id="checkin" class="page">
+					<div class="p600">
+						<h2>Picture Report</h2>
+						<br>Allows you to provide real time site updates for selected locations. You can provide a photo and description.
+						<br><br>Any user following the site will be notified and will value the latest on site update from you.
+						<br><br><a id="checkinphotobutton" class="button button-green">Next - Take a Picture</a>
+						<br><br><img id="checkinimage" width="400"/>
+					</div>
+				</div>
+				
+				<!-- CLUB -->
+				<div id="club" class="page">
+					<div id="clubtop" style="width:640px;height:260px">
+					</div>
+						<div style="font-size:32px;color:#ffffff;width:640px;height:80px;background:rgba(0,0,0,0.8)">
+							<div id="clubname" style="float:left;padding-left:20px;padding-top:20px"></div>
+							<div style="float:right;padding-right:15px;padding-top:15px">
+								<a id="clubfollowbutton" class="button button-green">Follow</a>
+								<a id="clubunfollowbutton" class="button button-orange" style="display:none">Unfollow</a>
+							</div>
+						</div>
+					<div style="width:640px;height:1px;background-color:#cccccc"></div>
+					<br><div id="clubdescription" style="padding-left:25px"></div>
+					<br><div id="clubcomment" style="padding-left:15px;padding-top:15px">
+						<form onsubmit="return commentclub()">
+							<a id="clubphotobutton" class="button button-green">Photo</a>&nbsp;<img id="clubphoto" width="1" height="50"/>
+							<input id="clubcommentinput" type="text" placeholder="Add a new comment" style="width:260px"/>
+							&nbsp;<a id="clubcommentbutton" class="button button-green">Send</a>
+						</form>
+					</div>
+					<div style="width:640px;height:1px;background-color:#cccccc"></div>
+					<div id="clubcomments"></div>
+				</div>
+				
+				<!-- CLUBS -->
+				<div id="clubs" class="page">
+					<div id="clubstitle" style="padding-top:25px;padding-left:20px;padding-bottom:10px;color:#000000;font-size:50px">My Clubs</div>
+					<div id="clubscontent"></div>
+					<div id="clubstitle2" style="padding-top:20px;padding-left:20px;padding-bottom:10px;color:#000000;font-size:50px">Recommended Clubs</div>
+					<div id="clubsrecommended"></div>
+				</div>
+
+				<!-- CREATE -->
+				<div id="create" class="page">
+					<div class="p600">
+						<h1>Plan a new flight</h1>
+						<br><input type="text" id="createname" placeholder="Enter name for the flight" style="width:580px"/>
+						<br><br><textarea id="createdesc" placeholder="Enter description for the flight" style="width:580px;height:100px"></textarea>
+						<br><br><table class="pad10">
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Select Aircraft</td><td><div class="select"><select id="createsport"><option value="1">Airplane</option><option value="2">Sailplane</option><option value="3">Ultralight</option><option value="4">Rotor craft</option><option value="5">Paraglider</option><option value="6">Powered paraglider</option><option value="7">Hang glider</option><option value="8">Sky dive</option><option value="9">Wing suit</option><option value="10">Baloon</option><option value="11">Kite</option><option value="12">Speed-riding</option><option value="13">Other</option></select></div></td></tr>
+							<tr id="tr_date"><td style="vertical-align:middle;text-align:center;width:240px">Select Date</td><td><div class="date"><input id="createdate" type="text" placeholder="Select date..."></div></td></tr>
+							<!--<tr><td style="vertical-align:middle;text-align:center;width:240px">Select Time</td><td><div class="text"><input id="createtime" type="text" value="18:00"></div></td></tr>-->
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Select Privacy</td><td><div class="select"><select id="createstatus"><option value="0">Private</option><option value="1">Buddies</option><option value="2">Public</option></select></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Facebook Share</td><td><div class="select"><select id="createstatus"><option value="0">Disabled</option><option value="1">Share on my wall</option><option value="2">Share to friends</option></select></div></td></tr>
+						</table><br><br><a id="createnext" class="button button-green">Next</a>
+					</div>
+				</div>
+				
+				<!-- DETAILS -->
+				<div id="details" class="page">
+				
+					<div id="detailsimage" style="width:640px;height:200px"></div>
+					<div style="width:640px;height:1px;background-color:#cccccc"></div>
+					<div id="detailstop" style="width:640px;height:80px;background:rgba(0,0,0,0.8)">
+						<div id="detailsname" style="padding:22px;font-size:32px;color:#ffffff;float:left;width:400px;height:20px;overflow:hidden"></div>
+						<div style="float:right;padding-right:15px;padding-top:15px">
+							<a href="javascript:sendgpstoemail()" id="detailsbutton" class="button button-green">Send Data</a>
+						</div>
+					</div>
+					<div id="detailsgps" class="p10" style="background:rgba(0,0,0,0.2);text-align:center">
+						<br><font id="detailswatch" style="font-size:80px">00:00:00</font><br><b style="color:#000000">Flight duration</b><br>
+						<br><table><tr><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="detailsspeed" style="font-size:60px">0</font> km/h<br><b style="color:#000000">Speed</b>
+						</td><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="detailsaltitude" style="font-size:60px">0</font> m<br><b style="color:#000000">Max altitude</b>
+						</td></tr></table>
+						<br><table><tr><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="detailsdistance" style="font-size:60px">0</font> m<br><b style="color:#000000">Total distance</b>
+						</td><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="details5pts" style="font-size:60px">0</font> m<br><b style="color:#000000">Dist. over 5 pts</b>
+						</td></tr></table><br>
+					</div>
+					<div id="detailsdetails" class="p10">
+						<div id="detailsdescription" class="p10"></div>
+					</div>
+				</div>
+				
+				<!-- EVENT -->
+				<div id="event" class="page">
+				
+					<div id="eventmap" style="width:640px;height:200px"></div>
+					<div style="width:640px;height:1px;background-color:#cccccc"></div>
+					<div id="eventtop" style="width:640px;height:80px;background:rgba(0,0,0,0.8)">
+						<div id="eventname" style="padding:22px;font-size:32px;color:#ffffff;float:left;width:450px;height:20px;overflow:hidden"></div>
+						<div style="float:right;padding-right:15px;padding-top:15px">
+							<a id="eventjoinbutton" class="button button-green">Join</a>
+							<a id="eventunjoinbutton" class="button button-orange" style="display:none">Un-Join</a>
+						</div>
+					</div>
+					<div id="eventdetailsgps" class="p10" style="background:rgba(0,0,0,0.2);text-align:center;display:none">
+						<!--<br><font id="stopwatch" style="font-size:80px">00:00:00</font><br><b style="color:#000000">Flight duration</b><br>
+						<br><table><tr><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="avgspeed" style="font-size:60px">0</font> km/h<br><b style="color:#000000">Speed</b>
+						</td><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="maxaltitude" style="font-size:60px">0</font> m<br><b style="color:#000000">Max altitude</b>
+						</td></tr></table>
+						<br><table><tr><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="totaldistance" style="font-size:60px">0</font> m<br><b style="color:#000000">Total distance</b>
+						</td><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="distance5pts" style="font-size:60px">0</font> m<br><b style="color:#000000">Dist. over 5 pts</b>
+						</td></tr></table><br><a href="javascript:sendgpstoemail()" class="button button-green">Send GPS data to my email</a><br><br>-->
+					</div>
+					<div id="eventdetails" class="p10">
+						<div id="eventdescription" class="p10"></div>
+						<div id="eventtime" class="p10" style="color:#888888"></div>
+						<div id="eventgps" class="p10"></div>
+					</div>
+					<div style="padding-left:20px">
+						<form onsubmit="return comment()">
+							<a id="eventphotobutton" class="button button-green">Photo</a>&nbsp;<img id="eventphoto" width="1" height="50"/>
+							<input id="eventcommentinput" type="text" placeholder="Add a new comment" style="width:260px"/>
+							&nbsp;<a id="eventcommentbutton" class="button button-green">Send</a>
+						</form>
+					</div>
+					<div id="eventcomments"></div>
+				</div>
+				
+				<!-- EVENTS -->
+				<div id="events" class="page">
+					<div id="eventstitle">
+						<div id="eventsmenu2" style="padding-top:30px;padding-left:30px;padding-bottom:20px;float:left;color:#aaaaaa"><b style="color:#333333">All Flights</b></div>
+						<div id="eventsmenu0" style="padding-top:30px;padding-left:30px;padding-bottom:20px;float:left;color:#aaaaaa">Future Flights</div>
+						<div id="eventsmenu1" style="padding-top:30px;padding-left:30px;padding-bottom:20px;float:left;color:#aaaaaa">Past Flights</div>
+					</div>
+					<div id="eventscontent"></div>
+				</div>
+				
+				<!-- EXPLORE -->
+				<div id="explore" class="page">
+					<div id="exploremap" style="width:640px;height:320px"></div>
+					<div id="exploreevents"></div>
+				</div>
+			
+				<!-- LOGIN -->
+				<div id="login" class="page">
+				
+					<div class="p600">
+						<h1>Login to your account</h1>
+						<br>Use your e-mail and password to log in.
+						<br><br><table class="pad10">
+							<tr><td style="vertical-align:middle;text-align:center;width:200px">Your e-mail</td><td><div class="text"><input id="loginemail" type="text" placeholder="Enter your email"/></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:200px">Password</td><td><div class="text"><input id="loginpword" type="password" placeholder="Enter your password"/></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:200px"></td><td><a id="loginbutton" class="button button-green" style="width:100px">Login</a> &nbsp; <a id="logincancel" class="button button-orange">Cancel</a><br><a href="javascript:toggle('loginforgot')">Forgot your password?</a></td></tr>
+						</table>
+						<br><div id="logindata"></div>
+						<br><div id="loginforgot" style="display:none">
+							<h2>Send new password to your e-mail</h1>
+							<br><table class="pad10">
+								<tr><td style="vertical-align:middle;text-align:center;width:200px">Existing e-mail</td><td><div class="text"><input id="loginemailforgot" type="text" placeholder="Enter your email"/></div></td></tr>
+								<tr><td style="vertical-align:middle;text-align:center;width:200px"></td><td><a id="loginbuttonforgot" class="button button-green" style="width:250px">Reset my Password</a></td></tr>
+							</table>
+						</div>
+					</div>
+				
+				</div>
+				
+				<!-- NEWS -->
+				<div id="news" class="page">
+					<div id="futurenews" style="display:none"></div>
+					<div id="profile">
+						<div id="profilealpha">
+							<table>
+								<tr>
+									<td><img id="userimage" width="90" height="90" src="images/profileimage.png" style="margin-left:20px;border: 5px solid white;"/></td>
+									<td style="vertical-align:middle;padding-left:20px"><div id="username" style="width:250px;color:#ffffff;font-size:30px;text-shadow: 0 -1px 0 rgba(50, 80, 50, 0.8)"></div></td>
+									<td style="vertical-align:middle;padding-left:200px"><img id="refreshnews" src="images/refresh.png"/></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div id="mainnews"></div>
+				</div>
+				
+				<!-- NOTIFY -->
+				<div id="notify" class="page">
+					<div class="p600">
+						<h1>Notify Clubs and Friends</h1>
+						<br>Select clubs and/or friends below you want to notify and click "Create Flight" end of the page.
+					</div>
+					<div id="notifyclubs"></div>
+					<div id="notifybuddies"></div>
+					<div class="p600"><a id="createsubmit" class="button button-green">Create Flight</a></div>
+				</div>
+				
+				<!-- PHOTO -->
+				<div id="photo" class="page">
+					<div class="p600">
+						<!--<a id="photoupload" class="button button-green">Upload a Picture</a>-->
+						<a id="photocamera" class="button button-green">Take a Picture</a>
+						<br><br><img id="myimage" width="400"/>
+					</div>
+				</div>
+				
+				<!-- RECORD -->
+				<div id="record" class="page">
+					<div style="text-align:center">
+						<!--<br><table align="center"><tr><td style="padding-top:3px;padding-left:160px">GPS SIGNAL STRENGTH:&nbsp; </td><td><div style="width:30px;height:30px;overflow:hidden"><img src="images/gpsbars.png"/></div></td></tr></table>-->
+						<br><div id = "recordAndPauseB"> <a ><img id="play_icon" src="images/play.png"/></a></div>
+						<div id="stop_button" style="display:none" ><a><img id="stop_icon" src="images/stop.png"/></a></div>	
+						<br><font id="stopwatch" style="font-size:80px">00:00:00</font><br><b style="color:#000000">Flight duration</b><br>
+						<br><table><tr><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="avgspeed" style="font-size:60px">0</font> <x id="s_unit"></x><br><b style="color:#000000">Speed</b>
+						</td><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="maxaltitude" style="font-size:60px">0</font> <x id="d_unit"></x><br><b style="color:#000000">Max altitude</b>
+						</td></tr></table>
+						<br><table><tr><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="totaldistance" style="font-size:60px">0</font> <x id="d_unit2"></x><br><b style="color:#000000">Total distance</b>
+						</td><td width="320" style="text-align:center;vertical-align:middle">
+							<font id="distance5pts" style="font-size:60px">0</font> <x id="d_unit3"></x><br><b style="color:#000000">Dist. over 5 pts</b>
+						</td></tr></table>
+						<br><br><div id="cameraRButton"> <a ><img id="camera_icon" src="images/camerabutton.png"/></a></div>
+						<br><br><button width="100px" height="50px"id="syncingButton" style="font-size:50px" >SYNC</button><br><br>
+					</div>
+				</div>
+				
+				<!-- REGISTER -->
+				<div id="register" class="page">
+				
+					<div class="p600">
+						<h1>Register new account</h1>
+						<br><table class="pad10">
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">First name</td><td><div class="text"><input id="registername" type="text" placeholder="Enter your first name"></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Last name</td><td><div class="text"><input id="registerlast" type="text" placeholder="Enter your last name"></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Your email</td><td><div class="text"><input id="registeremail" type="text" placeholder="Enter your email"></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Password</td><td><div class="text"><input id="registerpword" type="password" placeholder="Enter your password"></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Password again</td><td><div class="text"><input id="registerpword2" type="password" placeholder="Retype your password"></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:240px"></td><td></td></tr>
+						</table>
+						<br><table style="margin-left:10px"><tr><td><img id="registerimage" src="images/profileimage.png" width="100" height="100"></td><td width="20"></td><td><div id="registerphoto"></div></td><td style="padding-top:24px">&nbsp;&nbsp;&nbsp;<a id="registerbutton" class="button button-green" style="width:100px">Register</a></td><td style="padding-top:24px">&nbsp;&nbsp;&nbsp;<a id="registercancel" class="button button-orange">Cancel</a></td></tr></table>
+						<br><div id="registerdata"></div>
+						<br><div id="registerterms">Terms and Conditions</div>
+					</div>
+					
+				</div>
+					
+				<!-- SETTINGS -->
+				<div id="settings" class="page">
+					<div class="p600">
+						<h2>Edit Yalldo Settings</h2>
+						<br>Save settings for this device.
+						<br><br><br><table class="pad10">
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Unit Selection</td><td><div class="select"><select id="settingsunit"><option value="1">Metric (c/m/kph)</option><option value="0">Empirical (f/ft/mph)</option></select></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Use knots for speed</td><td><div class="select"><select id="useknots"><option value="1">Yes</option><option value="0" selected>No</option></select></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Email Notifications</td><td><div class="select"><select id="settingsnoti"><option value="0">No thank you</option><option value="1">Monthly Newsletter</option><option selected value="2">Daily Report</option><option value="3">All Notifications</option></select></div></td></tr>
+							<tr><td style="vertical-align:middle;text-align:center;width:240px">Language</td><td><div class="select"><select id="settingslang"><option value="1">English</option><option value="2">Finnish</option><option value="3">French</option></select></div></td></tr>
+						</table>
+						<div class="center">
+							<br>
+							<!--<br><a id="settingssave" class="button button-green" style="width:400px">Save Settings</a>
+							<br><a id="settingssync" class="button button-green" style="width:400px">Synchronize Data</a>
+							<br><br>-->
+							<br><a id="settingstutorial" class="button button-green" style="width:320px">See how YALLDO works</a>
+							<br><a id="settingsterms" class="button button-orange" style="width:320px">Terms & Conditions</a>
+						</div>
+					</div>
+				</div>
+				
+				<!-- SITE -->
+				<div id="site" class="page">
+					<div id="sitemap" style="width:640px;height:200px"></div>
+					<div id="sitetop" style="width:640px;height:80px">
+						<div style="font-size:32px;color:#ffffff;width:640px;height:80px;background:rgba(0,0,0,0.8)">
+							<div id="sitename" style="float:left;padding-left:20px;padding-top:20px"></div>
+							<div style="float:right;padding-right:15px;padding-top:15px">
+								<a id="sitefollowbutton" class="button button-green">Follow</a>
+								<a id="siteunfollowbutton" class="button button-orange" style="display:none">Unfollow</a>
+							</div>
+						</div>
+						
+					</div>
+					<div style="width:640px;height:1px;background-color:#cccccc"></div>
+					<div id="sitecomment" style="padding-left:15px;padding-top:15px">
+						<form onsubmit="return commentsite()">
+							<a id="sitephotobutton" class="button button-green">Photo</a>&nbsp;<img id="sitephoto" width="1" height="50"/>
+							<input id="sitecommentinput" type="text" placeholder="Add a new comment" style="width:260px"/>
+							&nbsp;<a id="sitecommentbutton" class="button button-green">Send</a>
+						</form>
+					</div>
+					<div id="sitedetails" class="p10"></div>
+					<div id="sitecomments"></div>
+				</div>
+				
+				<!-- SITES -->
+				<div id="sites" class="page">
+					<div id="sitestitle" style="padding-top:25px;padding-left:20px;padding-bottom:10px;color:#000000;font-size:50px">Sites Following</div>
+					<div id="sitescontent"></div>
+					<div id="sitestitle2" style="padding-top:20px;padding-left:20px;padding-bottom:10px;color:#000000;font-size:50px">Recommended Sites</div>
+					<div id="sitesrecommended"></div>
+				</div>
+				
+				<!-- SITESEARCH -->
+				<div id="sitesearch" class="page">
+					<div id="sitesearchmap" style="width:640px;height:400px"></div>
+					<div id="sitesearchsites"></div>
+				</div>
+				
+				<!-- SYNC -->
+				<div id="sync" class="page">
+					<div class="p600">
+						<h1>Synchronization</h1>
+						<div id="syncdata"></div>
+					</div>
+				</div>
+				
+				<!-- TERMS -->
+				<div id="terms" class="page">
+					<div class="p600">
+						<h2>Terms and Conditions</h2>
+						<br> Last updated May 13, 2013<br><br>1. LICENSE<br><br>1.1. Governing Agreement<br><br> The terms of this agreement ("Terms of Service") govern the relationship between you and Gravity Free LLC (hereinafter YALLDO or 'ÂœYALLDO'Â� or "Us" or "We") regarding your use of  Gravity Free's applications and related services, which includes YALLDO websites (the "Service"). In this agreement, "YALLDO" means GRAVITY FREE LLC. Located at 127 Chesham Avenue, San Carlos, CA 94070.<br><br> 1.2. Privacy Policy<br><br> Use of the Service is also governed by YALLDO's Privacy Policy, which is incorporated herein by reference. Your privacy is important to us. We designed YALLDO's Privacy Policy to make important disclosures about how we collect and use your content and information and how you can use the Service to share such information with others. We encourage you to read the YALLDO Privacy Policy, carefully, and use it to help make informed decisions.<br><br> By creating an account or accessing or using the Service you accept and agree to be bound by these Terms of Service and consent to the collection, use and storage of your information as outlined in YALLDO's Privacy Policy.<br><br> 1.3. Updates to the Terms of Service and YALLDO Privacy Policy<br><br> YALLDO reserves the right, at our discretion, to change, modify, add or remove portions of these Terms of Service and its Privacy Policy at any time by posting the amended Terms on the YALLDO Service. You may also be given additional notice, such as an e-mail message or messaging within the Service, of any changes. You will be deemed to have accepted such changes by continuing to use the Service. Except as otherwise stated, all amended terms shall automatically be effective 30 days after they are initially posted. YALLDO may also revise other policies, codes or rules at any time, and the new versions will be available on www.YALLDO.com or in the Service. No amendment to the Terms of Service or Privacy Policy shall apply to any dispute of which YALLDO had actual notice before the date of the amendment.<br><br> This agreement may not be otherwise amended except in a writing hand signed by you and us. For purposes of this provision, "writing" does not include an e-mail message and a signature does not include an electronic signature.<br><br> If at any point you do not agree to any portion of the then-current version of our Terms of Service, the YALLDO Privacy Policy, or any other YALLDO policy, rules or codes of conduct relating to your use of the Service, your license to use the Service shall immediately terminate, and you must immediately stop using the Service.<br><br> To the extent the Terms of Service or YALLDO Privacy Policy conflict with any other YALLDO terms, policy, rules or codes of conduct, the terms contained in these Terms of Service and in the YALLDO Privacy Policy shall govern.<br><br> 1.4. Grant of a Limited License to Use the Service<br><br> Subject to your agreement and continuing compliance with these Terms of Service and any other relevant YALLDO policies, such as the Forum Rules or Loyalty Program Terms, YALLDO grants you a non-exclusive, non-transferable, revocable limited license subject to the limitations in Sections 1.5-1.9 to access and use the Service using a YALLDO supported web browser (such as Mozilla Firefox or Microsoft Internet Explorer) or mobile device solely for your own non-commercial entertainment purposes. You agree not to use the Service for any other purpose.<br><br> 1.5. Accessing the Service<br><br> Before accessing or using the Service, including browsing any YALLDO website or accessing a application, you must agree to these Terms of Service and the Privacy Policy. You may also be required to register an account on the Service (an "Account"), have a valid account on the social networking service ("SNS") through which you connect to the Service, or have an account with the applications provider for your mobile device. If you are between the ages of 13 and 17, you represent that your legal guardian has reviewed and agreed to these Terms.<br><br> You must provide all equipment and software necessary to connect to the Service, including, but not limited to, a mobile device that is suitable to connect with and use the Service, in cases where the Service offers a mobile component.<br><br> You are responsible for any fees, including internet connection or mobile fees that you incur when accessing the Service.<br> 1.6. Use of the Service<br><br> The following restrictions apply to the use of the Service:<br><br>     * a. You shall not create an Account or access the Service if you are under the age of 13;<br>     * b. You shall monitor your Account to restrict use by minors, and you will deny access to children under the age of 13. You accept full responsibility for any unauthorized use of the Service by minors. Your are responsible for any use of your credit card or other payment instrument (e.g. paypal) by minors;<br>     * c. You shall not have more than one Account, per platform or SNS, at any given time, and shall not create an account using a false identity or information, or on behalf of someone other than yourself;<br>     * d. You shall not create an Account or use the Service if you are a convicted sex offender;<br>     * e. You shall not have an Account or use the Service if you have previously been removed by YALLDO, or previously been banned from playing any YALLDO application;<br>     * f. You shall use your Account only for non-commercial purposes;<br>     * g. You shall not use your Account to advertise, or solicit, or transmit any commercial advertisements, including chain letters, junk e-mail or repetitive messages (spim and spam) to anyone;<br>     * h. You shall not use your Account to engage in any illegal conduct;<br>     * i. You shall not rent, lease, sell, trade, gift, bequeath or otherwise transfer your Account or any virtual items or virtual currency associated with your Account to anyone without YALLDO's written permission; and<br>     * j. You shall not access or use an Account which has been rented, leased, sold, traded, gifted, bequeathed, or otherwise transferred from the Account creator without YALLDO's permission.<br>     * k. If you access the Service from an SNS you shall comply with its terms of service/use as well as these Terms of Service.<br><br> 1.7. Account Information<br><br> When creating or updating an Account on the Service, you are required to provide YALLDO with certain personal information, which may include your name, birth date, e-mail address, and, in some cases, payment information. This information will be held and used in accordance with YALLDO's Privacy Policy. You agree that you will supply accurate and complete information to YALLDO, and that you will update that information promptly after it changes.<br><br> You understand that on certain YALLDO websites your user ID number, name and profile picture will be publicly available and that search engines may index your name and profile photo.<br><br> 1.8. Username and Password<br><br> During the Account creation process, you will be required to select a password ("Login Information"). The following rules govern the security of your Login Information:<br><br>     * a. You shall not share the Account or the Login Information, nor let anyone else access your account or do anything else that might jeopardize the security of your Account;<br>     * b. In the event you become aware of or reasonably suspect any breach of security, including without limitation any loss, theft, or unauthorized disclosure of the Login Information, you must immediately notify YALLDO and modify your Login Information;<br>     * c. You are solely responsible for maintaining the confidentiality of the Login Information, and you will be responsible for all uses of the Login Information, including purchases, whether or not authorized by you; and<br>     * d. You are responsible for anything that happens through your Account.<br><br> YALLDO reserves the right to remove or reclaim any usernames at any time and for any reason, including but not limited to claims by a third party that a username violates the third party's rights.<br><br> 1.9. License Limitations<br><br> Any use of the Service in violation of these License Limitations is strictly prohibited, can result in the immediate revocation of your limited license granted by Section 1.4, and may subject you to liability for violations of law. ANY ATTEMPT BY YOU TO DISRUPT OR INTERFERE WITH THE SERVICE INCLUDING UNDERMINING OR MANIPULATING THE LEGITIMATE OPERATION OF ANY YALLDO APPLICATION IS A VIOLATION OF YALLDO POLICY AND MAY BE A VIOLATION OF CRIMINAL AND CIVIL LAWS.<br><br> You agree that you will not, under any circumstances:<br><br>     * a. Engage in any act that YALLDO deems to be in conflict with the spirit or intent of the Service, including but not limited to circumventing or manipulating these Terms, our application rules, application mechanics or policies;<br>     * b. Make improper use of YALLDO's support services, including by submitting false abuse reports; or<br>     * c. Use the Service in connection with any violation of any applicable law or regulation, or do anything that promotes the violation of any applicable law or regulation;<br><br> CHEATING AND HACKING - You agree that you will not, under any circumstances:<br><br>     * d. Use cheats, exploits, automation software, bots, hacks, mods or any unauthorized third-party software designed to modify or interfere with the Service, any YALLDO Application or any YALLDO application experience;<br>     * e. Use the Service in order to design or assist in the design of cheats, automation software, bots, hacks, mods or any other unauthorized third-party software designed to modify or interfere with the Service, any YALLDO application or any YALLDO application experience;<br>     * f. Without YALLDO's express written consent, modify or cause to be modified any files that are a part of the Service or any YALLDO application;<br>     * g. Disrupt, overburden, or aid or assist in the disruption or overburdening of (1) any computer or server used to offer or support the Service or any YALLDO application environment (each a "Server"); or (2) the enjoyment of the Service or any YALLDO application by any other person;<br>     * h. Institute, assist, or become involved in any type of attack, including without limitation distribution of a virus, denial of service attacks upon the Service, or other attempts to disrupt the Service or any other person's use or enjoyment of the Service; or<br>     * i. Attempt to gain unauthorized access to the Service, Accounts registered to others or to the computers, Servers, or networks connected to the Service by any means other than the user interface provided by YALLDO, including but not limited to, by circumventing or modifying, attempting to circumvent or modify, or encouraging or assisting any other person to circumvent or modify, any security, technology, device, or software that is part of the Service;<br><br> OFFENSIVE OR INFRINGING CONTENT - You agree that you will not, under any circumstances:<br><br>     * j. Post any information that is abusive, threatening, obscene, defamatory, libelous, or racially, sexually, religiously, or otherwise objectionable or offensive;<br>     * k. Post any information that contains nudity, excessive violence, or offensive subject matter or that contains a link to such content;<br>     * l. Attempt to, or harass, abuse, or harm, or advocate or incite harassment, abuse, or harm of another person, group, including YALLDO employees, including YALLDO's customer service representatives; or<br>     * m. Make available through the Service any material or information that infringes any copyright, trademark, patent, trade secret, right of privacy, right of publicity, or other right of any person or entity or impersonates any other person, including without limitation a YALLDO employee;<br><br> COMMERCIAL ACTIVITY - You agree that you will not, under any circumstances:<br><br>     * n. Without YALLDO's express written consent, use the Service, any YALLDO application, or any part thereof for any commercial purpose, including but not limited to, (1) permitting, authorizing, or offering use of the Service, any YALLDO application, or any part thereof at a cyber cafÄ‚Å  or any other commercial establishment provided however that, for clarity, providing the means for users to access the Internet is not prohibited by the forgoing, (2) communicating or facilitating any commercial advertisement or solicitation, or (3) gathering in-application currency, items or resources for sale;<br>     * o. Use the Service, any YALLDO application, or any part thereof for performing in-application services, such as power-leveling and item collection services, in exchange for payment outside the Service;<br>     * p. Transmit unauthorized communications through the Service, including junk mail, chain letters, spam and any materials that promote malware, spyware and downloadable items; or<br><br> UNAUTHORIZED USE OR CONNECTION TO THE SERVICE - You agree that you will not, under any circumstances:<br><br>     * q. Interfere or attempt to interfere with the proper functioning of the Service or connect to or use the Service or any YALLDO application in any way not expressly permitted by these Terms of Service;<br>     * r. Use any unauthorized third-party software that accesses, intercepts, "mines", or otherwise collects information from or through the Service or that is in transit from or to the Service, including, without limitation, any software that reads areas of RAM or streams of network traffic used by the Service or any YALLDO application to store information about YALLDO application characters, elements, or environment. YALLDO may, at its sole and absolute discretion, allow the use of certain third party user interfaces;<br>     * s. Intercept, examine or otherwise observe any proprietary communications protocol used by a client, a Server, or the Service, whether through the use of a network analyzer, packet sniffer or other device;<br>     * t. Make any automated use of the system, or take any action that imposes or may impose (in our sole discretion) an unreasonable or disproportionately large load on our infrastructure;<br>     * u. Bypass any robot exclusion headers or other measures we take to restrict access to the service or use any software, technology, or device to send content or messages, scrape, spider, or crawl the Service, or harvest or manipulate data;<br>     * v. Use, facilitate, create, or maintain any unauthorized connection to the Service, including without limitation (1) any connection to any unauthorized server that emulates, or attempts to emulate any part of the Service, or (2) any connection using programs, tools, or software not expressly approved by YALLDO;<br>     * w. Reverse engineer, decompile, disassemble, decipher or otherwise attempt to derive the source code for any underlying software or other intellectual property used to provide the Service or any YALLDO application, or to obtain any information from the Service or any YALLDO application using any method not expressly permitted by YALLDO; or<br>     * x. Copy, modify or distribute rights or content from any YALLDO site or application, or YALLDO's copyrights or trademarks or use any method to copy or distribute the content of the Service except as specifically allowed in these Terms of Service;<br><br> COLLECTION AND PUBLICATION OF PERSONAL INFORMATION - You agree that you will not, under any circumstances:<br><br>     * y. Solicit or attempt to solicit personal information from other users of the Service or any YALLDO application; or<br>     * z. Collect, harvest or post anyone's private information, including personally identifiable information (whether in text, image or video form), identification documents, or financial information through the Service.<br>     * aa. upload or transmit (or attempt to upload or to transmit), without YALLDO's express permission, any material that acts as a passive or active information collection or transmission mechanism, including, without limitation, clear graphics interchange formats ("gifs"), 1x1 pixels, web bugs, cookies or other similar devices (sometimes referred to as "spyware," "passive collection mechanisms" or "pcms").<br><br> 1.10. Suspension and Termination of Account and Service<br><br> WITHOUT LIMITING ANY OTHER REMEDIES, YALLDO MAY LIMIT, SUSPEND, TERMINATE, MODIFY, OR DELETE ACCOUNTS OR ACCESS TO YALLDO SERVICES OR PORTIONS THEREOF IF YOU ARE, OR YALLDO SUSPECTS THAT YOU ARE, FAILING TO COMPLY WITH ANY OF THESE TERMS OF SERVICE OR FOR ANY ACTUAL OR SUSPECTED ILLEGAL OR IMPROPER USE OF THE SERVICE, WITH OR WITHOUT NOTICE TO YOU. YOU CAN LOSE YOUR USER NAME AND PERSONA AS A RESULT OF ACCOUNT TERMINATION OR LIMITATION, AS WELL AS ANY BENEFITS, PRIVILEGES, EARNED ITEMS AND PURCHASED ITEMS ASSOCIATED WITH YOUR USE OF THE SERVICE, AND YALLDO IS UNDER NO OBLIGATION TO COMPENSATE YOU FOR ANY SUCH LOSSES OR RESULTS.<br><br> WITHOUT LIMITING OUR OTHER REMEDIES, WE MAY LIMIT, SUSPEND OR TERMINATE THE SERVICE AND USER ACCOUNTS OR PORTIONS THEREOF, PROHIBIT ACCESS TO OUR APPLICATIONS AND SITES, AND THEIR CONTENT, SERVICES AND TOOLS, DELAY OR REMOVE HOSTED CONTENT, AND TAKE TECHNICAL AND LEGAL STEPS TO PREVENT USERS FROM ACCESSING THE SERVICE IF WE BELIEVE THAT THEY ARE CREATING RISK OR POSSIBLE LEGAL LIABILITIES, INFRINGING THE INTELLECTUAL PROPERTY RIGHTS OF THIRD PARTIES, OR ACTING INCONSISTENTLY WITH THE LETTER OR SPIRIT OF OUR TERMS OR POLICIES. ADDITIONALLY, WE MAY, IN APPROPRIATE CIRCUMSTANCES AND AT OUR SOLE DISCRETION, SUSPEND OR TERMINATE ACCOUNTS OF USERS WHO MAY BE REPEAT INFRINGERS OF THIRD PARTY INTELLECTUAL PROPERTY RIGHTS.<br><br> YALLDO reserves the right to stop offering and/or supporting the Service or a particular application or part of the Service at any time, at which point your license to use the Service or a part thereof will be automatically terminated. In such event, YALLDO shall not be required to provide refunds, benefits or other compensation to users in connection with such discontinued Services.<br><br> Termination of your Account can include disabling your access to the Service or any part thereof including any content you submitted or others submitted.<br><br> You may cancel any Account registered to you at any time by following the instructions on YALLDO.com.<br><br> 1.11. Ownership<br><br> 1.11.1. Applications and Service<br><br> The Service (including without limitation any applications, titles, computer code, themes, objects, characters, character names, badges, stories, dialogue, catch phrases, concepts, artwork, animations, sounds, musical compositions, audio-visual effects, methods of operation, moral rights, documentation, in-application chat transcripts, character profile information, recordings of applications played using a YALLDO application client, and the YALLDO application clients and server software) are copyrighted works owned by YALLDO Inc. YALLDO reserves all rights, including without limitation, all intellectual property rights or other proprietary rights, in connection with its applications and the Service.<br><br> 1.11.2. Accounts<br><br> NOTWITHSTANDING ANYTHING TO THE CONTRARY HEREIN, YOU ACKNOWLEDGE AND AGREE THAT YOU SHALL HAVE NO OWNERSHIP OR OTHER PROPERTY INTEREST IN THE ACCOUNT, AND YOU FURTHER ACKNOWLEDGE AND AGREE THAT ALL RIGHTS IN AND TO THE ACCOUNT ARE AND SHALL FOREVER BE OWNED BY AND INURE TO THE BENEFIT OF YALLDO. YALLDO RESERVES THE RIGHT TO TERMINATE ANY ACCOUNT THAT HAS BEEN INACTIVE FOR 180 DAYS.<br><br> 1.11.3. Virtual Items<br><br> YALLDO owns, has licensed, or otherwise has rights to use all of the content that appears in the Service or the YALLDO applications. Notwithstanding any provision to the contrary herein, you agree that you have no right or title in or to any content that appears in the Service, including without limitation the virtual goods or currency appearing or originating in any YALLDO application, whether earned in a application or purchased from YALLDO, or any other attributes associated with an Account or stored on the Service.<br><br> YALLDO prohibits and does not recognize any purported transfers of virtual property effectuated outside of the Service, or the purported sale, gift or trade in the "real world" of anything that appears or originates in the Service, unless otherwise expressly authorized by YALLDO in writing. Accordingly, you may not trade, sell or attempt to sell in-application items or currency for "real" money, or exchange those items or currency for value of any kind outside of a application, without YALLDO's written permission. Any such transfer or attempted transfer is prohibited and void, and will subject your Account to termination.<br><br> 1.11.4. User Content<br><br> "User Content" means any communications, images, sounds, and all the material, data, and information that you upload or transmit through a YALLDO application client or the Service, or that other users upload or transmit, including without limitation any chat text.<br><br> By transmitting or submitting any User Content while using the Service, you affirm, represent and warrant that such transmission or submission is (a) accurate and not confidential; (b) not in violation of any laws, contractual restrictions or other third party rights, and that you have permission from any third party whose personal information or intellectual property is comprised in the User Content; (c) free of viruses, adware, spyware, worms or other malicious code; and (d) you acknowledge and agree that any of your personal information within such content will at all times be processed by YALLDO in accordance with its Privacy Policy.<br><br>  You hereby grant YALLDO a perpetual and irrevocable (other than as provided below), worldwide, fully paid-up and royalty free, non-exclusive, unlimited license, including the right to sublicense and assign to third parties, and right to copy, reproduce, fix, adapt, modify, improve, translate, reformat, create derivative works from, manufacture, introduce into circulation, commercialize, publish, distribute, sell, license, sublicense, transfer, rent, lease, transmit, publicly display, publicly perform, or provide access to electronically, broadcast, communicate to the public by telecommunication, display, perform, enter into computer memory, and use and practice, in any way now known or in the future discovered, your User Content as well as all modified and derivative works thereof. To the extent permitted by applicable laws, you hereby waive any moral rights you may have in any User Content. The license you grant Us to use user posted content (except any content you submit in response to YALLDO promotions and competition or any other content specifically solicited by YALLDO) ends when you delete your User Content or you close your Account unless your User content has been shared with others, and they have not deleted it. However, you understand and accept that removed content may persist in back-up copies for a reasonable period of time.<br><br> 2. USER CONTENT<br> 2.1. Content Screening<br><br> YALLDO assumes no responsibility for the conduct of any user submitting any User Content, and assumes no responsibility for monitoring the Service for inappropriate content or conduct.<br><br> We do not, and cannot, pre-screen or monitor all User Content. However, at our discretion, our representatives or technology may monitor and/or record your interaction with the Service or communications (including without limitation chat text) when you are using the Service.<br><br> By entering into these Terms of Service, you hereby provide your irrevocable consent to such monitoring and recording. You acknowledge and agree that you have no expectation of privacy concerning the transmission of any User Content, including without limitation chat text or voice communications.<br><br> If at any time YALLDO chooses, in its sole discretion, to monitor the Service, YALLDO nonetheless assumes no responsibility for User Content and assumes no obligation to modify or remove any inappropriate User Content. We have the right, but not the obligation, in our sole discretion to edit, refuse to post, or remove any User Content.<br><br> 2.2. Information Use by Other Members of the Service<br><br> 2.2.1. Public Discourse<br><br> The Service may include various forums, blogs and chat features where you can post User Content, including your observations and comments on designated topics. YALLDO cannot guarantee that other members will not use the ideas and information that you share. Therefore, if you have an idea or information that you would like to keep confidential and/or don't want others to use, do not post it on the Service. YALLDO shall have no responsibility to evaluate, use or compensate you for any ideas or information you may choose to submit.<br><br> YALLDO IS NOT RESPONSIBLE FOR A MEMBER'S MISUSE OR MISAPPROPRIATION OF ANY CONTENT OR INFORMATION YOU POST IN ANY FORUMS, BLOGS AND CHAT ROOMS.<br><br> 2.2.2. Responsible For Your Own Content<br><br> You are solely responsible for the information that you post on, through or in connection with the Service and that you provide to others.<br><br> Information, materials, products or services provided by other users (for instance, in their profiles) may, in whole or in part, be unauthorized, impermissible or otherwise violate these Terms of Service, and YALLDO assumes no responsibility or liability for this material. If you become aware of misuse of the Service by any person, please use any "Report Abuse" link provided or contact us at Customer Support. <br> YALLDO may reject, refuse to post or delete any User Content for any or no reason, including, but not limited to, User Content that in the sole judgment of YALLDO violates these Terms of Service.<br><br> YALLDO reserves the right to limit the storage capacity of User Content that you post on, through or in connection with the Service.<br><br> 2.3. Disclosure<br><br> You expressly agree that We have the right, at all times, and at our sole discretion, to disclose any user content and other information (including without limitation chat text, voice communications, IP addresses and your personal information): (a) in response to legal process (for example, a court order, search warrant or subpoena) when We have a good faith belief that the information is required to be disclosed in response to legal process; (b) to allow Us to satisfy any applicable law, regulation or governmental request; (c) to allow Us to enforce these Terms of Service, the YALLDO Privacy Policy or any other agreement, terms or policy relating to the Service, (d) to protect our legal rights and remedies; (e) in other circumstances in which We believe the YALLDO applications or web sites are being used in the commission of a crime (including exchanging information with other companies and organizations for the purposes of fraud protection and credit risk reduction) and for the purpose of reporting the same to the appropriate authorities; (f) to report any other suspected crime or other offensive behavior to the appropriate authorities; (g) when We have a good faith belief that there is a threat to the health and/or safety of you or another person; or (h) when necessary either to protect the rights or property of YALLDO, or for Us to render the Service you have requested.<br><br> 2.4. User Interactions<br><br> 2.4.1 Member Disputes<br><br> You are solely responsible for your interactions with other users of the Service and any other parties with whom you interact through the Service and/or YALLDO applications. YALLDO reserves the right, but has no obligation, to become involved in any way with these disputes.<br><br> 2.4.2 Release<br><br> If you have a dispute with one or more users, you release us (and our officers, directors, agents, subsidiaries, joint ventures and employees) from claims, demands and damages (actual and consequential) of every kind and nature, known and unknown, arising out of or in any way connected with such disputes. If you are a California resident, you waive California Civil Code Ã‚Â§1542, which says: "A general release does not extend to claims which the creditor does not know or suspect to exist in his favor at the time of executing the release, which if known by him must have materially affected his settlement with the debtor."<br><br> 3. FEES AND PURCHASE TERMS<br><br> 3.1. Purchases<br><br> In the Service you may purchase, with "real world" money, a license to use (a) "virtual currency", including but not limited to virtual coins, cash, tokens, or points, all for use in YALLDO applications; (b) "virtual in-application items" (together with "virtual currency", "Virtual Items"); and (c) other goods or services ("Merchandise"). You may also obtain a license to use Virtual Items by redeeming third party virtual currency such as Facebook Credits.<br><br> ALL PURCHASES AND REDEMPTIONS OF THIRD PARTY VIRTUAL CURRENCY MADE THROUGH THE SERVICE ARE NON-REFUNDABLE.<br><br> You can order Virtual Items by visiting the purchase page in one of our applications, providing your billing information, confirming the particulars of your purchase and re-affirming your agreement to these Terms. When you place an order to purchase Virtual Items from our Service, we may send you a confirmatory e-mail that will contain details of the items you have ordered. Please check that the details in the confirmatory e-mail are correct as soon as possible and maintain a copy of it for your records. YALLDO keeps records of transactions in order to deal with any subsequent queries. If you purchase Facebook Credits from Facebook, you are agreeing to Facebook's Payment Terms and YALLDO is not a party to the transaction.<br><br> For Virtual Items, your order will represent an offer to us to purchase the relevant product(s) which will be accepted by us when we make the Virtual Items available in your account for you to use in our applications or debit your credit card, whichever comes first.<br><br> The provision of Virtual Items for use in YALLDO applications is a service provided by YALLDO that commences immediately upon acceptance by YALLDO of your purchase. By ordering Virtual Items you agree and accept that YALLDO will provide them to you immediately following completion of your purchase. If you reside in the European Union and you purchase a product or service from YALLDO, you have the right to withdraw from a purchase within seven calendar days, commencing on the day after the date of purchase (the "Cooling Off Period"). However, you lose your right of withdrawal if the performance of the services begins before the end of the Cooling Off Period. Accordingly, please note that if you purchase Virtual Items from us, your right of withdrawal is lost as the performance of our services begins immediately once your purchase is completed.<br><br> 3.2. Payment of Fees<br><br> You agree to pay all fees and applicable taxes incurred by you or anyone using an Account registered to you. YALLDO may revise the pricing for the goods and services offered through the Service at any time. YOU ACKNOWLEDGE THAT YALLDO IS NOT REQUIRED TO PROVIDE A REFUND FOR ANY REASON, AND THAT YOU WILL NOT RECEIVE MONEY OR OTHER COMPENSATION FOR UNUSED VIRTUAL ITEMS WHEN AN ACCOUNT IS CLOSED, WHETHER SUCH CLOSURE WAS VOLUNTARY OR INVOLUNTARY.<br><br> 4. THIRD PARTY ADVERTISING<br><br> 4.1. Third Party Advertisements<br><br> You understand that the Service and YALLDO applications may feature advertisements from YALLDO or third parties. YALLDO's disclosure of information for third party advertising is addressed in YALLDO's Privacy Policy.<br><br> 4.2. Links to Third Party Sites And Dealings With Advertisers<br><br> YALLDO may provide links on the Service to third party websites or vendors who may invite you to participate in a promotional offer in return for receiving optional Services and/or upgrades (such as in-application currency). Any charges or obligations you incur in your dealings with these third parties are your responsibility. YALLDO makes no representation or warranty regarding any content, goods and/or services provided by any third party even if linked from our Service, and will not be liable for any claim relating to any third party content, goods and/or services. The linked sites are not under the control of YALLDO and may collect data or solicit personal information from you. YALLDO is not responsible for their content, business practices or privacy policies, or for the collection, use or disclosure of any information those sites may collect. Further, the inclusion of any link does not imply endorsement of YALLDO of these linked sites.<br><br> 5. COPYRIGHT NOTICES/COMPLAINTS<br><br> It is YALLDO's policy to respond to notices of alleged copyright infringement that comply with the Digital Millennium Copyright Act. For more information, please go to YALLDO's Copyright Page to review our DMCA Notification Guidelines. YALLDO reserves the right to terminate without notice any User's access to the YALLDO Service if that User is determined by YALLDO to be a "repeat infringer." In addition, YALLDO accommodates and does not interfere with standard technical measures used by copyright owners to protect their materials.<br><br> 6. UPDATES TO THE SERVICE<br><br> You understand that the Service is an evolving one. YALLDO may require that you accept updates to the Service and to YALLDO's applications you have installed on your computer. You acknowledge and agree that YALLDO may update the Service and YALLDO applications, with or without notifying you. You may need to update third party software from time to time in order to receive the Service and play YALLDO's Applications.<br><br> 7. DISCLAIMERS / LIMITATIONS / WAIVERS / INDEMNIFICATION<br><br> 7.1. DISCLAIMER OF WARRANTIES<br><br> YOU EXPRESSLY AGREE THAT USE OF THE SERVICE IS AT YOUR SOLE RISK AND IS PROVIDED ON AN "AS IS" BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF TITLE OR IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE (EXCEPT ONLY TO THE EXTENT PROHIBITED UNDER APPLICABLE LAW WITH ANY LEGALLY REQUIRED WARRANTY PERIOD THE SHORTER OF THIRTY DAYS FROM FIRST USE OR THE MINIMUM PERIOD REQUIRED).<br><br> WITHOUT LIMITING THE FOREGOING, NEITHER YALLDO NOR ITS AFFILIATES OR SUBSIDIARIES, OR ANY OF THEIR DIRECTORS, EMPLOYEES, AGENTS, ATTORNEYS, THIRD-PARTY CONTENT PROVIDERS, DISTRIBUTORS, LICENSEES OR LICENSORS (COLLECTIVELY, "YALLDO PARTIES") WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED OR ERROR-FREE.<br><br> 7.2. LIMITATIONS; WAIVERS OF LIABILITY<br><br> YOU ACKNOWLEDGE AND AGREE THAT, TO THE FULLEST EXTENT PERMITTED BY ANY APPLICABLE LAW, THE DISCLAIMERS OF LIABILITY CONTAINED HEREIN APPLY TO ANY AND ALL DAMAGES OR INJURY WHATSOEVER CAUSED BY OR RELATED TO USE OF, OR INABILITY TO USE, THE SERVICE UNDER ANY CAUSE OR ACTION WHATSOEVER OF ANY JURISDICTION, INCLUDING, WITHOUT LIMITATION, ACTIONS FOR BREACH OF WARRANTY, BREACH OF CONTRACT OR TORT (INCLUDING NEGLIGENCE) AND THAT THE YALLDO PARTIES SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY OR CONSEQUENTIAL DAMAGES IN ANY WAY WHATSOEVER ARISING OUT OF THE USE OF, OR INABILITY TO USE, THE SERVICE.<br><br> YOU FURTHER SPECIFICALLY ACKNOWLEDGE THAT THE YALLDO PARTIES ARE NOT LIABLE, AND YOU AGREE NOT TO SEEK TO HOLD THE YALLDO PARTIES LIABLE, FOR THE CONDUCT OF THIRD PARTIES, INCLUDING OTHER USERS OF THE SERVICE AND OPERATORS OF EXTERNAL SITES, AND THAT THE RISK OF THE SERVICE AND EXTERNAL SITES AND OF INJURY FROM THE FOREGOING RESTS ENTIRELY WITH YOU.<br><br> UNDER NO CIRCUMSTANCES WILL THE YALLDO PARTIES BE LIABLE TO YOU FOR MORE THAN THE AMOUNT YOU HAVE PAID YALLDO IN THE ONE HUNDRED AND EIGHTY DAYS (180) DAYS IMMEDIATELY PRECEDING THE DATE ON WHICH YOU FIRST ASSERT ANY SUCH CLAIM.<br><br> YOU ACKNOWLEDGE AND AGREE THAT IF YOU HAVE NOT PAID YALLDO ANY AMOUNTS IN THE ONE HUNDRED AND EIGHTY DAYS (180) DAYS IMMEDIATELY PRECEDING THE DATE ON WHICH YOU FIRST ASSERT ANY SUCH CLAIM, YOUR SOLE AND EXCLUSIVE REMEDY FOR ANY DISPUTE WITH YALLDO IS TO STOP USING THE SERVICE AND TO CANCEL YOUR ACCOUNT.<br><br> YOU ACKNOWLEDGE AND AGREE THAT YOU ARE SOLELY LIABLE AND RESPONSIBLE FOR YOUR INTERACTIONS WITH OTHER MEMBERS - BOTH POSSIBLE ONLINE AND OFFLINE ACTIVITY WITH OTHER MEMBERS<br><br>  YOU ACKNOWLEDGE AND AGREE THAT YOU ARE SOLELY LIABLE AND RESPONSIBLE FOR ALL POSSIBLE ACTIVITY FOUND OR INITIATED WITH OR BY THE HELP OF SERVICE AND ITS MEMBERS, INCLUDING ALL POSSIBLE FLIGHTS AND OR OTHER POSSIBLE TRIPS, TRAVELS AND EVENTS, AND WHAT EVER MAY HAPPEN DURING THESE EVENTS.<br><br> SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES OR THE LIMITATION OR EXCLUSION OF LIABILITY FOR CERTAIN TYPES OF DAMAGES. THEREFORE, SOME OF THE ABOVE LIMITATIONS IN THE SECTION MAY NOT APPLY TO YOU.<br><br> 7.3. Indemnification<br><br> You agree to indemnify, save, and hold YALLDO, its affiliated companies, contractors, employees, agents and its third-party suppliers, licensors, and partners harmless from any claims, losses, damages, liabilities, including legal fees and expenses, arising out of your use or misuse of the Service, any violation by you of these Terms of Service, or any breach of the representations, warranties, and covenants made by you herein. YALLDO reserves the right, at Your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify YALLDO, and you agree to cooperate with YALLDO's defense of these claims. YALLDO will use reasonable efforts to notify you of any such claim, action, or proceeding upon becoming aware of it.<br><br> You agree that the provisions in this paragraph will survive any termination of your Account(s) or of the Service.<br><br> 8. DISPUTE RESOLUTION<br><br> 8.1. General<br><br> If a dispute arises between you and YALLDO, our goal is to provide you with a neutral and cost effective means of resolving the dispute quickly. Accordingly, you and YALLDO agree that we will resolve any claim or controversy at law or equity that arises out of this Agreement or our services (a "Claim") in accordance with one of the subsections below or as we and you otherwise agree in writing. Before resorting to these alternatives, we strongly encourage you to first contact us directly to seek a resolution by going to Customer Support. We will consider reasonable requests to resolve the dispute through alternative dispute resolution procedures, such as mediation or arbitration, as alternatives to litigation.<br><br> 8.2. Law and Forum for Legal Disputes<br><br> If you are a resident of the United States or Japan, this Agreement and any dispute arising out of or related to it or the Service shall be governed in all respects by the laws of the State of California as they apply to agreements entered into and to be performed entirely within California between California residents, without regard to conflict of law provisions. You agree that any claim or dispute you may have against YALLDO LLC. must be resolved exclusively by a state or federal court located in San Francisco County, California, except as otherwise agreed by the parties or as described in the Arbitration Option paragraph below. You agree to submit to the personal jurisdiction of the courts located within San Francisco County, California for the purpose of litigating all such claims or disputes.<br><br> If you reside outside of the United States or Japan, this Agreement and any dispute arising out of or related to it or the Service shall be governed in all respects by the laws of State of California and shall be considered to have been made and accepted in the State of California, without regard to conflict of law provisions. You agree that any claim or dispute you may have against YALLDO must be resolved exclusively by the courts in California, except as otherwise agreed by the parties or as described in the Arbitration Option paragraph below. You agree to submit to the personal jurisdiction of the courts in California for the purpose of litigating all such claims or disputes.<br><br> 8.3. Arbitration Option<br><br> For any claim (excluding claims for injunctive or other equitable relief) where the total amount of the award sought is less than $10,000, the party requesting relief may elect to resolve the dispute in a cost effective manner through binding non-appearance-based arbitration. In the event a party elects arbitration, they shall initiate such arbitration through an established alternative dispute resolution ("ADR") provider mutually agreed upon by the parties. The ADR provider and the parties must comply with the following rules: (a) the arbitration shall be conducted by telephone, online and/or be solely based on written submissions, the specific manner shall be chosen by the party initiating the arbitration; (b) the arbitration shall not involve any personal appearance by the parties or witnesses unless otherwise mutually agreed by the parties; and (c) any judgment on the award rendered by the arbitrator shall be final and may be entered in any court of competent jurisdiction.<br><br> 8.4. Improperly Filed Claims<br><br> All claims you bring against YALLDO must be resolved in accordance with this Legal Disputes Section. All claims filed or brought contrary to Section 8.2 shall be considered improperly filed. Should you file a claim contrary to Section 8.2, YALLDO shall be entitled to recover attorneys' fees and costs up to $1000, provided that YALLDO has notified you in writing of the improperly filed claim, and you have failed to promptly withdraw the claim.<br><br> 9. SEVERABILITY<br><br> You and YALLDO agree that if any portion of these Terms of Service or of the YALLDO Privacy Policy is found illegal or unenforceable, in whole or in part by any court of competent jurisdiction, such provision shall, as to such jurisdiction, be ineffective solely to the extent of such determination of invalidity or unenforceability without affecting the validity or enforceability thereof in any other manner or jurisdiction and without affecting the remaining provisions of the Terms, which shall continue to be in full force and effect.<br><br> 10. GENERAL PROVISIONS<br><br> 10.1. Assignment<br><br> YALLDO may assign or delegate these Terms of Service and/or the YALLDO Privacy Policy, in whole or in part, to any person or entity at any time with or without your consent. You may not assign or delegate any rights or obligations under the Terms of Service or Privacy Policy without YALLDO's prior written consent, and any unauthorized assignment and delegation by you is ineffective.<br><br> 10.2. Supplemental Policies<br><br> YALLDO may publish additional policies related to specific services such as forums, contests or loyalty programs. Your right to use such services is subject to those specific policies and these Terms of Service.<br><br> 10.3. Entire Agreement<br><br> These Terms of Service, any Supplemental Policies and any documents expressly incorporated by reference herein (including the YALLDO Privacy Policy), contain the entire understanding of you and YALLDO, and supersede all prior understandings of the parties hereto relating to the subject matter hereof, whether electronic, oral or written, or whether established by custom, practice, policy or precedent, between you and us with respect to the Service.<br><br> 10.4. No Waiver<br><br> The failure of YALLDO to require or enforce strict performance by you of any provision of these Terms of Service or the YALLDO Privacy Policy or failure to exercise any right under them shall not be construed as a waiver or relinquishment of YALLDO's right to assert or rely upon any such provision or right in that or any other instance.<br><br> The express waiver by YALLDO of any provision, condition, or requirement of these Terms of Service or the YALLDO Privacy Policy shall not constitute a waiver of any future obligation to comply with such provision, condition or requirement.<br><br> Except as expressly and specifically set forth in this these Terms of Service, no representations, statements, consents, waivers, or other acts or omissions by YALLDO shall be deemed a modification of these Terms of Service nor legally binding, unless documented in physical writing, hand signed by You and a duly appointed officer of YALLDO.<br><br> 10.5. Notices<br><br> We may notify you via postings on www.YALLDO.com, and via e-mail or any other communications means to contact information you provide to us. If you a user in the United States or Japan, all notices given by you or required from you under these Terms of Service or the YALLDO Privacy Policy shall be in writing and addressed to:  YALLDO located at 127 Chesham Ave, San Carlos, 94070 California, United States.<br><br> Any notices that you provide without compliance with this Section on Notices shall have no legal effect.<br><br> 10.6. Equitable Remedies<br><br> You acknowledge that the rights granted and obligations made under these Terms of Service to YALLDO are of a unique and irreplaceable nature, the loss of which shall irreparably harm YALLDO and which cannot be replaced by monetary damages alone so that YALLDO shall be entitled to injunctive or other equitable relief (without the obligations of posting any bond or surety or proof of damages) in the event of any breach or anticipatory breach by you.<br><br> You irrevocably waive all rights to seek injunctive or other equitable relief, or to enjoin or restrain the operation of the Service or any YALLDO application, exploitation of any advertising or other materials issued in connection therewith, or exploitation of the Service or any content or other material used or displayed through the Service and agree to limit your claims to claims for monetary damages, limited by Section 7.2 (if any).<br><br> 10.7. Force Majeure<br><br> YALLDO shall not be liable for any delay or failure to perform resulting from causes outside the reasonable control of YALLDO, including without limitation any failure to perform hereunder due to unforeseen circumstances or cause beyond YALLDO's control such as acts of God, war, terrorism, riots, embargoes, acts of civil or military authorities, fire, floods, accidents, strikes, or shortages of transportation facilities, fuel, energy, labor or materials.<br>
+					</div>
+				</div>
+				
+				<!-- TUTORIAL -->
+				<div id="tutorial" class="page">
+					<div class="p600">
+					
+						<h2>Learn the basics of Yalldo Flying</h2>
+						
+						<br>Go trough this 5 slide introduction to Yalldo Flying.
+						
+						
+						<br><br>
+						<div id="slideshow" class="pics">
+							<img src="images/shot-1.jpg" width="580" height="580" data-id="1" />
+							<img src="images/shot-2.jpg" width="580" height="580" data-id="2" />
+							<img src="images/shot-3.jpg" width="580" height="580" data-id="3" />
+							<img src="images/shot-4.jpg" width="580" height="580" data-id="4" />
+							<img src="images/shot-5.jpg" width="580" height="580" data-id="5" />
+						</div>
+						
+						<br>
+						<div style="float:right"><a id="next" href="#">Next slide >></a></div>
+						<div id="tutorialprev" style="display:none;margin-right:20px;float:right"><a id="prev" href="#"><< Prev slide</a></div>
+
+					</div>
+				</div>
+				
+				<!-- USER -->
+				<div id="user" class="page">
+					<div id="userdetails" class="p10">
+						<div id="username" class="p10" style="font-size:30px;color:#000000" style="vertical-align:top"></div>
+						<div id="userdescription" class="p10"></div>
+					</div>
+				</div>
+				
+				<div id="testnews" class="page">
+					
+				</div>
+				
+				<!-- TEST -->
+				<div id="test" class="page">
+					<div class="p600">
+						<h2>Test Backend Methods</h2>
+						<br>
+						<div class="select"><select id="testmethod" onchange="return testselect()">
+							<option value='{"content_id":1,"message":"hello","content_type":"event"}'>addcomment</option>
+							<option value='{"users_id":1}'>addfriend</option>
+							<option value='{"content_id":1,"content_type":"comment"}'>addlike</option>
+							<option value='{"id":1}'>getclub</option>
+							<option value='{"term":""}'>getclubs</option>
+							<option value='{"id":1}'>getclubnews</option>
+							<option value='{"id":1}'>getevent</option>
+							<option value='{"term":""}'>getevents</option>
+							<option value='{"id":1}'>geteventnews</option>
+							<option value='{"term":""}'>getfriends</option>
+							<option value='{}'>getnews</option>
+							<option value='{}'>getnotifications</option>
+							<option value='{"id":1}'>getsite</option>
+							<option value='{"term":""}'>getsites</option>
+							<option value='{"id":1}'>getsitenews</option>
+							<option value='{"languages_id":1}'>gettexts</option>
+							<option value='{}'>editevent</option>
+							<option value='{}'>editsite</option>
+							<option value='{"id":1}'>joinclub</option>
+							<option value='{"id":1}'>joinevent</option>
+							<option value='{"id":1,"friends":[1,2,3]}'>notifyfriends</option>
+							<option value='{"metric":true,"empirical":true}'>savesettings</option>
+							<option value='{"id":1,"gps":""}'>savetrace</option>
+						</select></div>
+						<br><textarea id="testparams" style="width:580px;height:100px">{"content_id":1,"message":"hello","content_type":"event"}</textarea>
+						<br><br><a id="testbutton" class="button button-green" style="width:250px">Get Results</a>
+						<br><br><div id="testresults" style="height:320px"></div>
+						<textarea style="width:580px;height:4560px;font-size:10px">
+YALLDO MOBILE BACKEND 14.5.2013
+
+/**
+*   addComment
+* 
+*   add comment for comments, clubs, sites, events or flights
+*   returns multidimensional array from selected content_type (id,users_id,image_path,message,date) ordered by date limit 20
+*   if there are not any rows for the selected "content_id" and "content_type", returned array should be empty
+*   error value "itemnotfound", means that the item (content_id+content_type) was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param content_id int
+*   @param message string
+*   @param content_type string (default "comment")
+*   @param photo base64 encoded bytearray (default null) - jpeg
+*   @return array(array(id,users_id,image_path,message,date))
+*/
+
+/**
+*   addFriend
+* 
+*   add friend to your buddies
+*   returns array from users table or error value, explaining the error
+*   array data should have columns "id", "username", "firstname" and "lastname" from users table for the selected user
+*   error value "itemnotfound", means that the user was not found from the database
+*
+*	@param users_id int
+*	@return array(id,username,firstname,lastname)
+*	@return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*   addLike
+* 
+*   add like for comments, clubs, sites, events or flights
+*   returns array of likes(users_id) for selected content_id and content_type or error value, explaining the error
+*   error value "itemnotfound", means that the item (content_id+content_type) was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param content_id int
+*   @param content_type string (default "comment") yalldo support only likes to comments
+*   @return array(array(users_id))
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*   getClub
+* 
+*   get data for selected club
+*   returns array from clubs(id,users_id,name,description,link,icon_file_name,image_file_name,top_file_name,membership,rights,editors_id,created_date) or error value, explaining the error
+*   error value "itemnotfound", means that the requested club was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param id int
+*   @return array(id,users_id,name,description,link,icon_file_name,image_file_name,top_file_name,membership,rights,editors_id,created_date)
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*   getClubs
+* 
+*   get list of clubs for selected terms
+*   returns multidimensional array from clubs table (id,users_id,name,description,link,icon_file_name,image_file_name,top_file_name,membership,rights,editors_id,created_date) or error value, explaining the error
+*   if term is empty, return all clubs that user can see limit 40
+*   if term is "recommended", return all clubs that recommended to the user limit 40
+*   if there are not any rows for the selected terms, returned array should be empty
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param term string (default "recommended")
+*   @return array(array(id,users_id,name,description,link,icon_file_name,image_file_name,top_file_name,membership,rights,editors_id,created_date))
+*   @return array(error) possible values: "networkerror"
+*/
+
+/**
+*   getClubNews
+* 
+*   get news for the selected club
+*   returns multidimensional array of objects, including news or error value, explaining the error
+*   if there are not any news for the selected club, returned array should be empty
+*   error value "itemnotfound", means that the requested club was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param id int (if value is 0, get latest news for all clubs)
+*   @return array({objects_of_news_items_check_specs_below})
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*	getEvent
+*
+*	@param id int
+*	@param user_id int
+*	@return array(id,name,description,start,end,latitude,longitude,sports_id,type,gps_path,created,status)
+*	@return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*	getEvents
+* 
+*	get list of events for selected terms
+*	returns multidimensional array from events table (id,name,description,start,end,latitude,longitude,sports_id,type,gps_path,created,status) or error value, explaining the error
+*	if term is empty, return all events that user can see limit 40
+*	if there are not any rows for the selected terms, returned array should be empty
+*	error value "networkerror", means that there was a problem to connect to database or any other libraries needed in this method
+* 
+*	@param term string (default "")
+*	@param past boolean enum(0-only future, 1-only past, 2-default, all)
+*	@param index int (default 0) page for results
+*	@param ne_latitude int (default null)
+*	@param ne_longitude int (default null)
+*	@param sw_latitude int (default null)
+*	@param sw_longitude int (default null)
+*	@return array(array(id,name,description,start,end,latitude,longitude,sports_id,type,gps_path,created,status))
+*	@return array(error) possible values: "networkerror"
+*/
+
+/**
+*   getEventNews
+* 
+*   get news for the selected event
+*   returns multidimensional array of objects, including news or error value, explaining the error
+*   if there are not any news for the selected event, returned array should be empty
+*   error value "itemnotfound", means that the requested event was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param id int (if value is 0, get latest news for all events)
+*   @return array({user:string=full-path-to-thumb,action:string=username,comment:string=comment,photo:string=full-path-to-photo})
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*   getFriends
+* 
+*   get buddies for the user
+*   returns multidimensional array from users_friends table (friends_id,status) or error value, explaining the error
+*   if term is empty, return all friends limit 100
+*   if there are not any friends for the selected user, returned array should be empty
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param term string (default "")
+*   @return array(array(friends_id,status))
+*   @return array(error) possible values: "networkerror"
+*/
+
+/**
+*   getNews
+* 
+*   get news for the user
+*   returns multidimensional array of objects, including news or error value, explaining the error
+*   if there are not any news, returned array should be empty
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 	
+*   @return array({objects_of_news_items_check_specs_below})
+*/
+
+/**
+*   getNotifications
+* 
+*   get notifications for the user
+*   returns multidimensional array of objects, including notifications or error value, explaining the error
+*   if there are not any notifications, returned array should be empty
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 	
+*   @return array({objects_of_notification_items_check_specs_below})
+*/
+
+/**
+*   getSite
+* 
+*   get data for selected site
+*   returns array from sites table (id,name,latitude,longitude,altitude,access,sport,landing,direction,takeoff) or error value, explaining the error
+*   error value "itemnotfound", means that the requested site was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param id int
+*	@param site_type enum(site_sites, site_sitesdhv, site_sitesusers, site_airports)
+*   @return array(id,name,latitude,longitude,altitude,access,sport,landing,direction,takeoff)
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*   getSites
+* 
+*   get list of sites for selected terms
+*   returns multidimensional array from sites table (id,name,latitude,longitude,altitude,access,sport,landing,direction,takeoff) or error value, explaining the error
+*   if term is empty, return all sites that user can see limit 40
+*   if term is "recommended", return all recommended sites to the user limit 40
+*   if there are not any rows for the selected terms, returned array should be empty
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param term string (default "recommended")
+*   @return array(array(id,name,latitude,longitude,altitude,access,sport,landing,direction,takeoff))
+*   @return array(error) possible values: "networkerror"
+**/
+
+/**
+*   getSiteNews
+* 
+*   get news for the selected site
+*   returns multidimensional array of objects, including news or error value, explaining the error
+*   if there are not any news for the selected site, returned array should be empty
+*   error value "itemnotfound", means that the requested site was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param id int (if value is 0, get latest news for all sites)
+*	@param site_type enum(site_sites, site_sitesdhv, site_sitesusers, site_airports)
+*   @return array({objects_of_news_items_check_specs_below})
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*   getTexts
+* 
+*   get texts for the selected language
+*   returns multidimensional array from texts table (var,value) or error value, explaining the error
+*   if there are not any rows for the selected language, returned array should be empty
+*   error value "itemnotfound", means that the requested language was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param languages_id int (default 29, English)
+*   @return array(array(var,value))
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*	editEvent
+*
+*	@param id int (if value is 0, create a new event, otherwise edit existing one)
+*	@param user_id number
+*	@param name string
+*	@param description string
+*	@param start string (format Y-m-d H:i:s)
+*	@param end string
+*	@param latitude number (default null)
+*	@param longitude number (default null)
+*	@param sports_id int (default 0)
+*	@param type string (default "event")
+*	@return array(id,name,description,start,end,latitude,longitude,sports_id,type,gps_path,created,status)
+*	@return array(error, message) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*   editSite
+* 
+*   add or edit a site
+*   returns array from sites(id,name,latitude,longitude,altitude,access,sport,landing,direction,takeoff) or error value, explaining the error
+*   error value "itemnotfound", means that the requested site was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param id int (if value is 0, create a new site, otherwise edit existing one)
+*   @param user_id int (default null)
+*   @param name string (default null)
+*   @param access string (default null)
+*   @param latitude number (default null)
+*   @param longitude number (default null)
+*   @param altitude number (default null)
+*   @param sport array(string) (default null)
+*   @param landing string (default "")
+*   @param direction string (default "")
+*   @param takeoff string (default "0")
+*   @return array(id,user_id,name,latitude,longitude,altitude,access,sport,landing,direction,takeoff)
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*   joinClub
+* 
+*   join existing club
+*   returns array from clubs (id,users_id,name,description,link,icon_file_name,image_file_name,top_file_name,membership,rights,editors_id,created_date) or error value, explaining the error
+*   error value "itemnotfound", means that the requested language was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param id int
+*   @return array(id,users_id,name,description,link,icon_file_name,image_file_name,top_file_name,membership,rights,editors_id,create_date)
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*   joinEvent
+* 
+*   join existing event
+*   returns array from events (id,name,description,start,end,latitude,longitude,sports_id,type,gps_path,created,status) or error value, explaining the error
+*   error value "itemnotfound", means that the requested language was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param id int
+*   @return array(id,name,description,start,end,latitude,longitude,sports_id,type,gps_path,created,status)
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/
+
+/**
+*   notifyFriends
+* 
+*   notify selected friends about the event
+*   returns multidimensional array (users_id) of all successfully notified friends or error value, explaining the error
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param id int
+*   @param friends array
+*   @return array(array(users_id))
+*   @return array(error) possible values: "networkerror"
+*/
+
+/**
+*   saveSettings
+* 
+*   save settings for the user
+*   returns array of updated user (settings) or error value, explaining the error
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param metric int
+*   @param empirical int
+*   @return array(settings))
+*   @return array(error) possible values: "networkerror"
+*/
+
+/**
+*   saveTrace
+* 
+*   save gps trace for a event
+*   returns array from events (id,name,description,start,end,latitude,longitude,sports_id,type,gps_path,created,status) or error value, explaining the error
+*   error value "itemnotfound", means that the requested event was not found from the database
+*   error value "networkerror", means that there was a problem to connect to database or any other libraries
+* 
+*   @param id int
+*   @param gps string (default "")
+*   @return array(id,name,description,start,end,latitude,longitude,sports_id,type,gps_path,created,status)
+*   @return array(error) possible values: "itemnotfound" or "networkerror"
+*/ 	
+						</textarea>
+					</div>
+				</div>
+		
+				<!-- BANNER -->
+				<div id="banner">
+					<div id="menubutton"></div>
+					<div id="title"></div>
+					<div id="notibutton"></div>
+					<div id="backbutton"></div>
+				</div>
+				
+				<div id="plus"></div>
+				<div id="minus"></div>
+
+				<div id="plusmenu" style="display:none;position:fixed;bottom:0px;left:120px;width:400px;height:450px;background-image:url(images/plusbg.png);text-align:center;padding-top:20px">
+					<br><a id="recordbutton" class="button button-green" style="font-size:30px">Record a GPS trace</a>
+					<br><a id="createbutton" class="button button-green" style="font-size:30px">Plan a new flight</a>
+					<br><a id="photobutton" class="button button-green" style="font-size:30px">Take a picture</a>
+					<br><a id="checkinbutton" class="button button-green" style="font-size:30px">Check In</a>
+				</div>
+
+		
+			</div>
+			
+		</div>
+		
+		
+		<div id="welcome"></div>
+		
+		<!-- START -->
+		<div id="start">
+			<table>
+				<tr><td colspan="2"><img src="images/start-top.jpg"/></td></tr>
+				<tr><td colspan="2"><div id="startfacebook"><img src="images/start-fb.png"/></div></td></tr>
+				<tr><td><div id="startregister"><img src="images/start-register.png"/></div></td><td><div id="startlogin"><img src="images/start-login.png"/></div></td></tr>
+				<tr><td colspan="2"><div id="starttutorial"><img src="images/start-intro.png"/></div></td></tr>
+				<tr><td colspan="2" style="height:200px;background-color:#ffffff;text-align:center;padding-top:10px">v.0.5.28</td></tr>
+			</table>
+		</div>
+		
+		<!-- POPUP -->
+		<div id="popup">
+			<div id="popupcontent" class="p600"></div>
+			<div id="popupclose"></div>
+		</div>
+		
+		<!-- INFO -->
+		<div id="info">
+			<div style="padding:20px;position:absolute;top:240px;left:120px;width:360px;height:280px;color:#ffffff;background:rgba(0,0,0,0.6);text-align:center">
+				<br><div id="infocontent"></div>
+				<br><div class="centered">
+					<a id="infobutton" class="button button-green" style="width:100px">OK</a>
+					<br><a id="infocancel" class="button button-orange" style="width:100px;display:none">Cancel</a>
+				</div>
+			</div>
+		</div>
+		
+		<!-- SPINNER -->
+		<div id="spinner"><!--<img src="images/spinner.gif"/>--></div>
+		
+		<!-- SPLASH -->
+		<div id="splash"></div>
+		
+	</body>
+</html>		

@@ -1,0 +1,57 @@
+<!DOCTYPE html> <!-- THIS IS ONLY USED WITH APPGYVER - SEPARATE PAGE FOR BOTH MENUS (LEFT & RIGHT) -->
+<html>
+
+	<head>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=0, minimum-scale=0.5, maximum-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="yalldo.css" />
+		<script src="scripts/steroids.js"></script>
+		<script src="scripts/jquery.js"></script>
+		
+	</head>
+	
+	<body style="width:640px;height:1200px">
+	
+		<!-- MENU -->
+		<div id="menu">
+			<div id="menunews" class="menu" style="background-position:0px -90px"><div id="icon-star"></div><div id="icon-text">News</div></div>
+			<div id="menuexplore" class="menu"><div id="icon-compass"></div><div id="icon-text">Explore</div></div>
+			<div id="menuclubs" class="menu"><div id="icon-flag"></div><div id="icon-text">Clubs</div></div>
+			<div id="menusites" class="menu"><div id="icon-map"></div><div id="icon-text">Sites</div></div>
+			<div id="menubuddies" class="menu"><div id="icon-users"></div><div id="icon-text">Buddies</div></div>
+			<div id="menuevents" class="menu"><div id="icon-flight"></div><div id="icon-text">Flights</div></div>
+			<div id="menusettings" class="menu"><div id="icon-settings"></div><div id="icon-text">Settings</div></div>
+			<div id="menutest" class="menu"><div id="icon-plus"></div><div id="icon-text">Backend</div></div>
+		</div>
+		
+		<script type="text/javascript">
+			
+			var currentmenu = "news";
+
+			$(document).ready(function() {
+				click("menunews",function() { menu("news"); });
+				click("menuexplore",function() { menu("explore"); });
+				click("menuclubs",function() { menu("clubs"); });
+				click("menusites",function() { menu("sites"); });
+				click("menubuddies",function() { menu("buddies"); });
+				click("menuevents",function() { menu("events"); });
+				click("menusettings",function() { menu("settings"); });
+			});
+
+			function menu(name) {
+			
+				if(currentmenu) bg("menu"+currentmenu,0);
+				window.postMessage(name);
+				bg("menu"+name,90);
+				currentmenu = name;
+			}
+			
+			jQuery.event.special.touchclick = { bindType: "touchstart", delegateType: "touchstart" };
+			function bg(e,y) { $("#"+e).css("background-position","0px -"+String(y)+"px"); }
+			function click(e,a) { if(e[0]!="."&&e[0]!="#") e = "#"+e; $(e).on("touchclick",a); }
+
+		</script>
+
+	</body>
+
+</html>		

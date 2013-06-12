@@ -1,0 +1,177 @@
+
+(0) BAR + MENU + NOTIFICATIONS
+
+	* real + ignition notification identifier				2h Lauri
+
+(1) START
+
+	* view ok
+	
+(2) TERMS
+
+	* view ok
+	
+(3) TUTORIAL
+
+	* view ok
+
+(4) LOGIN
+
+	* view ok
+	
+(5) REGISTER
+
+	* view ok
+
+(6) SPLASH
+
+	* view ok
+	
+(7) NEWS
+
+	* view ok
+		
+(8) RECORD
+
+	* view ok
+	
+(9) CREATE
+
+	* view ok
+	
+(10) NOTIFY
+
+	* view ok
+
+(11) CHECKIN
+
+	* from facead
+
+(12) DETAILS
+
+	* view ok
+		
+(13) EXPLORE
+
+	* view ok
+	
+(14) SITES
+
+	* view ok
+	
+(15) SITE
+
+	* view ok
+	
+(16) CLUBS
+
+	* view ok
+
+(18) BUDDIES
+
+	* view ok
+		
+(19) FLIGHTS
+
+	* view ok
+	
+(20) FLIGHT
+
+	* view ok
+	
+(21) SETTINGS
+
+	* units for all app										1h Ahmed
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+DONE
+	(0) BAR + MENU + NOTIFICATIONS
+	* updating mechanism for all pages						1h Lauri
+	* menu look and feel from the graphics					1h Lauri
+	* plus menu for all menu pages							1h Lauri
+	* update menu background when page is changed			0h Lauri
+	(3) TUTORIAL
+	* create new tutorial images (example slides made)		1h Lauri
+	* use jquery slideshow plugin to show it				1h Lauri
+	(4) LOGIN
+	* look an feel improvement and different errors			1h Lauri
+	* password field to act as a password					0h Lauri
+	* forgot your password									1h Lauri
+	(5) REGISTER
+	* register form bug fix, new method and show errors		1h Lauri
+	* password fields to act as a password					0h Lauri
+	* photo sending as part of the form						1h Lauri
+	(7) NEWS
+	* finalizing news engine and testing with backend		4h Lauri
+	* scroller and bar fixing								1h Lauri (this will be done with appgyver)
+	* plus menu improvement									1h Lauri
+	* future activities										2h Lauri (this one we tested, but decided to do later)
+	* manual news update									1h Lauri
+	(8) RECORD
+	* look and feel to match old version + new fields		1h Lauri
+	* picture taking while recording						1h Ahmed
+	* make the recording work like old version				24h Ahmed
+	* make the code simpler and comment all code			16h Ahmed
+	(9) CREATE
+	* add cancel to date picker (or when clicked away)		1h Lauri
+	* check and add the pre fillings from the old version	1h Ahmed
+	* hide date and show after recording					1h Ahmed
+	* save sport selection to local database				1h Ahmed
+	(10) NOTIFY
+	* add followed clubs from the user						2h Lauri
+	* filter friends and clubs from the list				2h Ahmed (ahmed is fixing bugs)
+	* move the create flight button on the bottom			0h Lauri
+	(12) DETAILS
+	* from old version										4h Lauri (added to flight page, where to get the details, I only have the gpsdata)
+	* send file to email									2h Lauri (sending it to your own email)
+	(13) EXPLORE
+	* replace flights with opportunities (location/zoom)	1h Lauri
+	* icons on the map										3h Lauri
+	(14) SITES
+	* recommended sites										1h Lauri
+	* different site types									1h Lauri
+	* site map search										2h Lauri (done, waiting for method update for backend)
+	* new site map logig									2h Lauri (new specs sent to facead)
+	(15) SITE
+	* adding a photo and comment							2h Lauri (there is still site_type missing from the db)
+	* showing the news										1h Lauri
+	* fixing the map										1h Lauri
+	(16) CLUBS
+	* title logic (following/recommended) + search results	1h Lauri
+	* follow / unfollow										1h Lauri
+	* number of followers									1h Lauri
+	* recommended clubs										1h Lauri
+	(17) CLUB
+	* club details											1h Lauri
+	* look and feel from sites								1h Lauri
+	* find and update correct club image					0h Lauri
+	* update club icons to lists (clubs/notify)				0h Lauri
+	(18) BUDDIES
+	* send message to buddies								2h Lauri
+	* managing actions (adding/remove/accept)				1h Lauri
+	* logic from the old version (+upper part buttons)		1h Lauri
+	(19) FLIGHTS
+	* synchronize button + indicator if not synced			1h Lauri
+	(20) FLIGHT
+	* ui improvements (site)								1h Lauri
+	* join / privacy logic									3h Lauri
+	(21) SETTINGS
+	* look and feel for buttons and dropdowns				1h Lauri
+	* green buttons away									0h Lauri
+	(19) FLIGHTS
+	* separate for future and old							2h Lauri
+
+	* share on facebook for create flight page				1h Facead?
+	* checkin page and functionalities						8h Facead?
